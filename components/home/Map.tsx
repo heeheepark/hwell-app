@@ -4,7 +4,6 @@ import { NaverMap } from '@/types/map';
 import Script from 'next/script';
 import React, { useRef } from 'react';
 
-// Props를 통해서 지도값을 셋팅한다.
 type Props = {
   mapId?: string;
   initialCenter?: Cordinates;
@@ -20,10 +19,8 @@ const Map = ({
   minZoom = INITIAL_MIN,
   onLoad,
 }: Props) => {
-  // 지도를 출력할 HTML DOM 참조
   const mapRef = useRef<NaverMap | null>(null);
 
-  // Naver Js 로드 후 처리
   const initializeMap = () => {
     const mapOptions = {
       center: new naver.maps.LatLng(...initialCenter),
@@ -36,10 +33,8 @@ const Map = ({
       },
     };
     const map = new window.naver.maps.Map(mapId, mapOptions);
-    // 지도 객체 생성 후에는 원하는 HTML DOM 요소를 지정하여 출력한다.
     mapRef.current = map;
 
-    //  초기 로딩 후 처리
     if (onLoad) {
       onLoad(map);
     }
